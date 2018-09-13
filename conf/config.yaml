@@ -37,4 +37,15 @@ ontologies:
   - id: monarch
     handle: data/monarch.json
     pre_load: true
-
+instances:
+  - id: Monarch
+    current: false
+  - id: Planteome
+    current: false
+  - id: Gene Ontology
+    current: false
+  - id: Alliance
+    enabled_namespace:
+      - biolink.api.bio.endpoints.bioentity
+      - biolink.api.graph.endpoints.node
+    current: true
