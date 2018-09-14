@@ -136,7 +136,7 @@ def get_node_graph(primaryKey, limit=None):
             end_node = rel.end_node
 
             if start_node.id not in seen:
-                seen.append(start_node.get('id'))
+                seen.append(start_node.id)
                 node_obj = {
                     'id': start_node.get('primaryKey'),
                     'lbl': start_node.get('name')
@@ -144,7 +144,7 @@ def get_node_graph(primaryKey, limit=None):
                 nodes.append(node_obj)
 
             if end_node.id not in seen:
-                seen.append(end_node.get('id'))
+                seen.append(end_node.id)
                 node_obj = {
                     'id': end_node.get('primaryKey'),
                     'lbl': end_node.get('name')
