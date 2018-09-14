@@ -30,6 +30,7 @@ def get_taxon_map():
             taxon_map[node.get('primaryKey')] = node.get('name')
     return taxon_map
 
+@cachier(stale_after=datetime.timedelta(days=2))
 def get_entity(primaryKey, type=None):
     """
     Given a primaryKey and type, get a matching node from Neo4j
@@ -75,6 +76,7 @@ def get_gene_to_expression(primaryKey):
     results = session.run(query)
     # TODO
 
+@cachier(stale_after=datetime.timedelta(days=2))
 def get_gene_to_phenotype(primaryKey):
     """
     Given a Gene primaryKey, get all gene to phenotype associations from Neo4j
