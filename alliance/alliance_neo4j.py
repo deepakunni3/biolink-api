@@ -7,8 +7,6 @@ from biolink.settings import get_biolink_config
 url = get_biolink_config()['alliance_neo4j']['url']
 username = get_biolink_config()['alliance_neo4j']['username']
 password = get_biolink_config()['alliance_neo4j']['password']
-driver = GraphDatabase.driver(url, auth=(username, password))
-session = driver.session()
 
 taxon_map = {}
 
@@ -21,6 +19,9 @@ def get_taxon_map():
     """
     Get all Species nodes from Neo4j and generate a taxonId to name map
     """
+    driver = GraphDatabase.driver(url, auth=(username, password))
+    session = driver.session()
+
     global taxon_map
     if not taxon_map:
         results = session.run("MATCH (n:Species) RETURN n")
@@ -33,6 +34,9 @@ def get_entity(primaryKey, type=None):
     """
     Given a primaryKey and type, get a matching node from Neo4j
     """
+    driver = GraphDatabase.driver(url, auth=(username, password))
+    session = driver.session()
+
     json_obj = {}
     if type is None:
         query = "MATCH (g {{ primaryKey:'{}' }}) return g".format(primaryKey)
@@ -59,6 +63,9 @@ def get_gene_to_expression(primaryKey):
     """
     Given a Gene primaryKey, get all gene to expression associations from Neo4j
     """
+    driver = GraphDatabase.driver(url, auth=(username, password))
+    session = driver.session()
+
     query = """
     MATCH p1=(g:Gene)-->(s:BioEntityGeneExpressionJoin)--(t) WHERE g.primaryKey = '{}'
     MATCH p2=(t:ExpressionBioEntity)--(o:EMAPATerm)
@@ -72,6 +79,9 @@ def get_gene_to_phenotype(primaryKey):
     """
     Given a Gene primaryKey, get all gene to phenotype associations from Neo4j
     """
+    driver = GraphDatabase.driver(url, auth=(username, password))
+    session = driver.session()
+
     query = "MATCH p=(g:Gene)-->(t:Phenotype) WHERE g.primaryKey = '{}' RETURN p1".format(primaryKey)
     results = session.run(query)
 
@@ -107,6 +117,9 @@ def get_node_graph(primaryKey, limit=None):
     """
     Given a primaryKey, get all linked nodes and return as a graph
     """
+    driver = GraphDatabase.driver(url, auth=(username, password))
+    session = driver.session()
+
     query = "MATCH p=(s {{ primaryKey: '{}' }})-[r]-(o) RETURN p".format(primaryKey)
     if limit:
         query += " LIMIT {}".format(limit)
