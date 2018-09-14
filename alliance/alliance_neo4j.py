@@ -2,8 +2,12 @@ from neo4j.v1 import GraphDatabase, basic_auth
 from cachier import cachier
 import datetime
 
-host = "bolt://localhost:7687"
-driver = GraphDatabase.driver(host, auth=('neo4j', 'demo'))
+from biolink.settings import get_biolink_config
+
+url = get_biolink_config()['alliance_neo4j']['url']
+username = get_biolink_config()['alliance_neo4j']['username']
+password = get_biolink_config()['alliance_neo4j']['password']
+driver = GraphDatabase.driver(url, auth=(username, password))
 session = driver.session()
 
 taxon_map = {}

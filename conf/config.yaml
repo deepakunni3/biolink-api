@@ -19,6 +19,10 @@ scigraph_ontology:
 scigraph_data:
   url: "https://scigraph-data.monarchinitiative.org/scigraph/"
   timeout: 2
+alliance_neo4j:
+  url: "bolt://localhost:7687"
+  username: neo4j
+  password: demo
 use_amigo_for:
   - function
 ontologies:
