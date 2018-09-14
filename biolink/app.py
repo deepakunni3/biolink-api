@@ -37,6 +37,9 @@ if 'biolink.api.ontol.endpoints.labeler' in current_instance['enabled_namespace'
 # /ontol/enrichment
 if 'biolink.api.ontol.endpoints.enrichment' in current_instance['enabled_namespace']:
     from biolink.api.ontol.endpoints.enrichment import ns as ontol_enrichment_namespace
+# /ontology
+if 'biolink.api.ontol.endpoints.ontology_endpoint' in current_instance['enabled_namespace']:
+    from biolink.api.ontol.endpoints.ontology_endpoint import ns as ontology_endpoint_namespace
 # /bioentityset
 if 'biolink.api.entityset.endpoints.summary' in current_instance['enabled_namespace']:
     from biolink.api.entityset.endpoints.summary import ns as entityset_summary_namespace

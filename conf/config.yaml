@@ -52,4 +52,5 @@ instances:
     enabled_namespace:
       - biolink.api.bio.endpoints.bioentity
       - biolink.api.graph.endpoints.node
+      - biolink.api.ontol.endpoints.ontology_endpoint
     current: true
