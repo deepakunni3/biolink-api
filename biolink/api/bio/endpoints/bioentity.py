@@ -90,7 +90,7 @@ def get_object_genotype(id, **args):
         return(obj)
 
 @ns.route('/<id>')
-@api.doc(params={'id': 'id, e.g. NCBIGene:84570'})
+@api.doc(params={'id': 'id, e.g. MGI:97364'})
 class GenericObject(Resource):
 
     @api.expect(core_parser)
@@ -188,7 +188,7 @@ class GeneHomologAssociations(Resource):
         )
 
 @ns.route('/gene/<id>/phenotypes')
-@api.doc(params={'id': 'CURIE identifier of gene, e.g. NCBIGene:4750. Equivalent IDs can be used with same results'})
+@api.doc(params={'id': 'CURIE identifier of gene, e.g. MGI:97364.'})
 class GenePhenotypeAssociations(Resource):
 
     @api.expect(core_parser)
