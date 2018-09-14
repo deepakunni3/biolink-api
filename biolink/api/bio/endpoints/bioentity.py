@@ -11,7 +11,7 @@ from biowikidata.wd_sparql import doid_to_wikidata, resolve_to_wikidata, conditi
 from ontobio.vocabulary.relations import HomologyTypes
 from ..closure_bins import create_closure_bin
 
-from biolink.settings import get_current_instance, get_config
+from biolink.settings import get_current_instance, get_biolink_config
 from alliance.alliance_neo4j import get_entity, get_gene_to_expression, get_gene_to_phenotype
 
 from biolink import USER_AGENT
@@ -68,7 +68,8 @@ scigraph = SciGraph('https://scigraph-data.monarchinitiative.org/scigraph/')
 homol_rel = HomologyTypes.Homolog.value
 
 SHOW_ROUTE = None
-if get_current_instance(get_config())['id'] == 'Alliance':
+biolink_config = get_biolink_config()
+if get_current_instance(get_biolink_config())['id'] == 'Alliance':
     SHOW_ROUTE = False
 
 def get_object_gene(id, **args):
@@ -98,7 +99,7 @@ class GenericObject(Resource):
         """
         Returns basic info on object of any type
         """
-        if get_current_instance(get_config())['id'] == 'Alliance':
+        if get_current_instance(get_biolink_config())['id'] == 'Alliance':
             obj = get_entity(id)
         else:
             obj = scigraph.bioobject(id)
@@ -117,7 +118,7 @@ class GenericObjectByType(Resource):
         """
         Return basic info on an object for a given type
         """
-        if get_current_instance(get_config())['id'] == 'Alliance':
+        if get_current_instance(get_biolink_config())['id'] == 'Alliance':
             obj = get_entity(id, type)
         else:
             obj = scigraph.bioobject(id)
@@ -197,7 +198,7 @@ class GenePhenotypeAssociations(Resource):
         Returns phenotypes associated with gene
         """
         results = None
-        if get_current_instance(get_config())['id'] == 'Alliance':
+        if get_current_instance(get_biolink_config())['id'] == 'Alliance':
             results = get_gene_to_phenotype(id)
         else:
             results = search_associations(

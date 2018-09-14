@@ -7,7 +7,7 @@ from flask import render_template
 from flask_cors import CORS, cross_origin
 from biolink import settings
 
-biolink_config = settings.get_config()
+biolink_config = settings.get_biolink_config()
 current_instance = None
 for instance in biolink_config['instances']:
     if instance['current']:

@@ -18,7 +18,7 @@ CONFIG = 'conf/config.yaml'
 
 biolink_config = None
 
-def get_config():
+def get_biolink_config():
     global biolink_config
     if biolink_config is None:
         with open(CONFIG, 'r') as f:

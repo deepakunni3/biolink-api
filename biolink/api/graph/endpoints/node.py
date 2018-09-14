@@ -7,7 +7,7 @@ from scigraph.scigraph_util import SciGraph
 from biolink.api.restplus import api
 from alliance.alliance_neo4j import get_node_graph
 
-from biolink.settings import get_current_instance, get_config
+from biolink.settings import get_current_instance, get_biolink_config
 
 log = logging.getLogger(__name__)
 
@@ -31,7 +31,7 @@ class NodeResource(Resource):
         """
         args = parser.parse_args()
 
-        if get_current_instance(get_config())['id'] == 'Alliance':
+        if get_current_instance(get_biolink_config())['id'] == 'Alliance':
             obj = get_node_graph(id)
         else:
             obj = sg.graph(id)
