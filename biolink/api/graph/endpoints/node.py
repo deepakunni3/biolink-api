@@ -5,6 +5,9 @@ from flask_restplus import Resource
 from biolink.datamodel.serializers import association, bbop_graph
 from scigraph.scigraph_util import SciGraph
 from biolink.api.restplus import api
+from alliance.alliance_neo4j import get_node_graph
+
+from biolink.settings import get_current_instance, get_config
 
 log = logging.getLogger(__name__)
 
@@ -27,10 +30,14 @@ class NodeResource(Resource):
         a molecular entity such as a gene or protein, or a conceptual entity such as a class from an ontology.
         """
         args = parser.parse_args()
-        
-        return sg.graph(id)
 
-@ns.route('/edges/from/<id>')
+        if get_current_instance(get_config())['id'] == 'Alliance':
+            obj = get_node_graph(id)
+        else:
+            obj = sg.graph(id)
+        return obj
+
+@ns.route('/edges/from/<id>', doc=False)
 @api.doc(params={'id': 'CURIE e.g. HP:0000465'})
 class EdgeResource(Resource):
 

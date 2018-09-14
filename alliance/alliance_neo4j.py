@@ -25,12 +25,15 @@ def get_taxon_map():
             taxon_map[node.get('primaryKey')] = node.get('name')
     return taxon_map
 
-def get_entity(primaryKey, type):
+def get_entity(primaryKey, type=None):
     """
     Given a primaryKey and type, get a matching node from Neo4j
     """
     json_obj = {}
-    query = "MATCH (g:{} {{ primaryKey:'{}' }}) return g".format(type_map[type], primaryKey)
+    if type is None:
+        query = "MATCH (g {{ primaryKey:'{}' }}) return g".format(primaryKey)
+    else:
+        query = "MATCH (g:{} {{ primaryKey:'{}' }}) return g".format(type_map[type], primaryKey)
     results = session.run(query)
 
     for r in results:
