@@ -84,7 +84,7 @@ def get_gene_to_phenotype(primaryKey):
     driver = GraphDatabase.driver(url, auth=(username, password))
     session = driver.session()
 
-    query = "MATCH p=(g:Gene)-->(t:Phenotype) WHERE g.primaryKey = '{}' RETURN p1".format(primaryKey)
+    query = "MATCH p=(g:Gene)-->(t:Phenotype) WHERE g.primaryKey = '{}' RETURN p".format(primaryKey)
     results = session.run(query)
 
     json_obj = {'associations': []}
