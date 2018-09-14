@@ -848,7 +848,6 @@ class PhenotypeVariantAssociations(Resource):
             **core_parser.parse_args()
         )
 
-@api.deprecated
 @ns.route('/goterm/<id>/genes', doc=SHOW_ROUTE)
 @api.doc(params={'id': 'CURIE identifier of a GO term, e.g. GO:0044598'})
 class GotermGeneAssociations(Resource):
